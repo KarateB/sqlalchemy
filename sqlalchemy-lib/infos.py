@@ -1,0 +1,7 @@
+sql_type = 'postgresql+psycopg2'
+username = 'KaiUser'
+password = 'uyt54ewq24TrY'
+host = 'localhost'
+port = '5432'
+database_name = 'postgres'
+url = f'{sql_type}://{username}:{password}@{host}:{port}/{database_name}'
