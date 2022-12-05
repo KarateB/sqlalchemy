@@ -11,12 +11,6 @@ Base = declarative_base()
 
 
 
-# root_sub = Table('RelationRoot',
-#                  Base.metadata,
-#                  Column('root_id', Integer, ForeignKey('Root._id')),
-#                  Column('sub_id', Integer, ForeignKey('Sub.sub_id'))
-#                  )
-
 class Root(Base):
     __tablename__ = "Root"
 
