@@ -84,30 +84,3 @@ if __name__ == "__main__":
     list(print(_) for _ in RootSqlalchemy)
     SubRootSqlalchemy = session.query(Sub).all()
     list(print(_) for _ in SubRootSqlalchemy)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# from sqlalchemy import or_, and_, ForeignKey

@@ -76,26 +76,3 @@ if __name__ == "__main__":
 
     user = session.query(Sub).filter(Sub.sub_id == 1).first()
     print('Call Sub from Root : root => ', user.root)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# from sqlalchemy import or_, and_, ForeignKey
