@@ -1,11 +1,12 @@
 from infos import url
 
-from sqlalchemy import Column, String, Boolean, create_engine
+from sqlalchemy import Column, String, Integer, Boolean, create_engine, DateTime
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy_mixins import UserMixin, BaseMixin
 
 from datetime import datetime as dt
+import uuid as ud
 
 engine = create_engine(url=url, echo=False)
 session = sessionmaker(bind=engine)()
@@ -19,6 +20,40 @@ class UserModule(UserMixin):
     created_at = Column(DateTime, server_default=dt.utcnow(), nullable=False)
     updated_at = Column(DateTime, server_default=dt.utcnow(), onupdate=dt.utcnow(), nullable=False)
     """
+    id = Column(Integer, primary_key=True, nullable=False)
+    created_at = Column(DateTime, server_default=str(dt.utcnow()), nullable=False)
+    updated_at = Column(DateTime, server_default=str(dt.utcnow()), onupdate=str(dt.utcnow()), nullable=False)
+
+    @property
+    def fid(self):
+        return self.id
+
+    @property
+    def fc_at(self):
+        return self.created_at
+
+    @property
+    def fup_at(self):
+        return self.updated_at
+
+    @fid.setter
+    def fid_set(self, new_value):
+        self.id = str(ud.uuid4())
+        if not new_value:
+            raise ValueError('Exception is raised')
+
+
+    @fc_at.setter
+    def fc_at_set(self, new_value):
+        self.created_at = dt.utcnow()
+        if not new_value:
+            raise ValueError('Exception is raised')
+
+    @fup_at.setter
+    def fup_at_set(self, new_value):
+        self.updated_at = dt.utcnow()
+        if new_value:
+            raise ValueError('Exception is raised')
 
 
 class Port(BaseMixin, UserModule):
@@ -29,15 +64,27 @@ class Port(BaseMixin, UserModule):
 
     title = Column(String, nullable=False)
     content = Column(String, nullable=False)
-    published = Column(Boolean,  server_default="TRUE", nullable=False)
+    deleted = Column(Boolean,  server_default="TRUE", nullable=False)
 
     @property
-    def port_title(self):
+    def ftitle(self):
         return self.title
 
     @property
-    def port_content(self):
+    def fcontent(self):
         return self.content
+
+    @ftitle.setter
+    def ftitle_set(self, new_value):
+        self.title = new_value
+        if new_value:
+            raise ValueError('Exception is raised')
+
+    @fcontent.setter
+    def fcontent_set(self, new_value):
+        self.title = new_value
+        if new_value:
+            raise ValueError('Exception is raised')
 
     def __repr__(self):
         _dict = dict()
@@ -50,21 +97,32 @@ class Port(BaseMixin, UserModule):
 
 
 port = Port()
-port.id = 1
-port.created_at = dt.utcnow()
-port.updated_at = dt.utcnow()
-port.published = True
 port.title = "New Title 1"
 port.content = "A new content 1"
+port.id = str(ud.uuid4())[:8]
+port.created_at = dt.utcnow()
+port.updated_at = dt.utcnow()
+port.deleted = False
+port.active = True
 
 port_2 = Port()
-port_2.id = 2
-port_2.created_at = dt.utcnow()
-port_2.updated_at = dt.utcnow()
-port_2.published = True
 port_2.title = "A New Title 2"
 port_2.content = "A new content 2"
+port_2.id = str(ud.uuid4())[:8]
+port_2.created_at = dt.utcnow()
+port_2.updated_at = dt.utcnow()
+port_2.deleted = False
+port_2.active = True
 
-list(print(_) for _ in [port, port_2])
+port_3 = Port()
+port_3.title = "A New Title 3"
+port_3.content = "A new content 3"
+port_3.id = str(ud.uuid4())[:8]
+port_3.created_at = dt.utcnow()
+port_3.updated_at = dt.utcnow()
+port_3.deleted = False
+port_3.active = True
+
+list(print(_) for _ in [port, port_2, port_3])
 
 
