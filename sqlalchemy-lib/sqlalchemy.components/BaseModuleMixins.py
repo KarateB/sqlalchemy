@@ -1,24 +1,28 @@
+import datetime
+
 from infos import url
 
-from sqlalchemy import Column, String, Integer, ForeignKey, Boolean, Table, create_engine
+from sqlalchemy import Column, String, Integer, ForeignKey, Boolean, Table, create_engine, DateTime
 from sqlalchemy.orm import relationship, sessionmaker, backref
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 from sqlalchemy.sql.expression import text
+from sqlalchemy_mixins import UserMixin, BaseMixin
 
+from datetime import datetime as dt
 
 engine = create_engine(url=url, echo=False)
 session = sessionmaker(bind=engine)()
 Base = declarative_base()
 
 
-class BaseModule(Base):
-
-    # todo class BaseMixin(Base) will appear in all parent classes
-    id = Column(Integer, primary_key=True, nullable=False)
-    active = Column(Boolean, nullable=False)
-    created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
-    updated_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
+class BaseModule(BaseMixin):
+    ...
+    # todo class BaseMixin will appear in all parent classes
+    """ id_ = Column(Integer, primary_key=True, nullable=False)
+    created_at = Column(DateTime, server_default=dt.utcnow(), nullable=False)
+    updated_at = Column(DateTime, server_default=dt.utcnow(), onupdate=dt.utcnow(), nullable=False)
+    """
 
 
 class Port(BaseModule):
