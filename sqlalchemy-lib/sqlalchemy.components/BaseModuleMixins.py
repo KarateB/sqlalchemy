@@ -42,15 +42,6 @@ class Port(BaseMixin, UserModule):
             _dict[str(_dict_names[i])] = str(getattr(self, _dict_names[i]))
 
         return str(_dict)
-        # _return = f' < \n' \
-        #           f' id : {self.id}\n ' \
-        #           f'created_at: {self.created_at}\n ' \
-        #           f'updated_at: {self.updated_at}\n ' \
-        #           f'title: {self.title}\n ' \
-        #           f'content: {self.content}\n ' \
-        #           f'published: {self.published}\n ' \
-        #           f'>'
-        # return _return
 
 
 port = Port()
