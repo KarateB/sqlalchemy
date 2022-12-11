@@ -12,6 +12,8 @@ engine = create_engine(url=url, echo=False)
 session = sessionmaker(bind=engine)()
 Base = declarative_base()
 
+listItems = []
+
 
 class UserModule(UserMixin):
     ...
@@ -20,6 +22,7 @@ class UserModule(UserMixin):
     created_at = Column(DateTime, server_default=dt.utcnow(), nullable=False)
     updated_at = Column(DateTime, server_default=dt.utcnow(), onupdate=dt.utcnow(), nullable=False)
     """
+    xid = Column(Integer, nullable=False)
     id = Column(Integer, primary_key=True, nullable=False)
     created_at = Column(DateTime, server_default=str(dt.utcnow()), nullable=False)
     updated_at = Column(DateTime, server_default=str(dt.utcnow()), onupdate=str(dt.utcnow()), nullable=False)
@@ -27,6 +30,10 @@ class UserModule(UserMixin):
     @property
     def fid(self):
         return self.id
+
+    @property
+    def fxid(self):
+        return self.xid
 
     @property
     def fc_at(self):
@@ -66,26 +73,6 @@ class Port(BaseMixin, UserModule):
     content = Column(String, nullable=False)
     deleted = Column(Boolean,  server_default="TRUE", nullable=False)
 
-    @property
-    def ftitle(self):
-        return self.title
-
-    @property
-    def fcontent(self):
-        return self.content
-
-    @ftitle.setter
-    def ftitle_set(self, new_value):
-        self.title = new_value
-        if new_value:
-            raise ValueError('Exception is raised')
-
-    @fcontent.setter
-    def fcontent_set(self, new_value):
-        self.title = new_value
-        if new_value:
-            raise ValueError('Exception is raised')
-
     def __repr__(self):
         _dict = dict()
         _dict_names = [a for a, b in Port.__dict__.items() if '_' not in str(a[::2])]
@@ -96,33 +83,21 @@ class Port(BaseMixin, UserModule):
         return str(_dict)
 
 
-port = Port()
-port.title = "New Title 1"
-port.content = "A new content 1"
-port.id = str(ud.uuid4())[:8]
-port.created_at = dt.utcnow()
-port.updated_at = dt.utcnow()
-port.deleted = False
-port.active = True
+def add_items(n) -> None:
+    for i in range(1, n):
+        port = Port()
+        port.title = "title " + str(i)
+        port.content = "content " + str(i)
+        port.id = str(ud.uuid4())[:8]
+        port.created_at = dt.utcnow()
+        port.updated_at = dt.utcnow()
+        port.deleted = False
+        port.active = True
+        port.xid = i
+        listItems.append(port)
 
-port_2 = Port()
-port_2.title = "A New Title 2"
-port_2.content = "A new content 2"
-port_2.id = str(ud.uuid4())[:8]
-port_2.created_at = dt.utcnow()
-port_2.updated_at = dt.utcnow()
-port_2.deleted = False
-port_2.active = True
 
-port_3 = Port()
-port_3.title = "A New Title 3"
-port_3.content = "A new content 3"
-port_3.id = str(ud.uuid4())[:8]
-port_3.created_at = dt.utcnow()
-port_3.updated_at = dt.utcnow()
-port_3.deleted = False
-port_3.active = True
-
-list(print(_) for _ in [port, port_2, port_3])
+add_items(100001)
+list(print(_) for _ in listItems)
 
 
