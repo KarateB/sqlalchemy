@@ -38,15 +38,23 @@ class Port(BaseMixin, UserModule):
     published = Column(Boolean,  server_default="TRUE", nullable=False)
 
     def __repr__(self):
-        _return = f' < \n' \
-                  f' id : {self.id}\n ' \
-                  f'created_at: {self.created_at}\n ' \
-                  f'updated_at: {self.updated_at}\n ' \
-                  f'title: {self.title}\n ' \
-                  f'content: {self.content}\n ' \
-                  f'published: {self.published}\n ' \
-                  f'>'
-        return _return
+        _dict = dict()
+        _dict_names = [a for a, b in Port.__dict__.items() if '_' not in str(a[::2])]
+        _dict_values = [b for a, b in Port.__dict__.items() if '_' not in str(a[::2])]
+
+        for i in range(len(_dict_values)):
+            _dict[str(_dict_names[i])] = str(getattr(self, _dict_names[i]))
+
+        return str(_dict)
+        # _return = f' < \n' \
+        #           f' id : {self.id}\n ' \
+        #           f'created_at: {self.created_at}\n ' \
+        #           f'updated_at: {self.updated_at}\n ' \
+        #           f'title: {self.title}\n ' \
+        #           f'content: {self.content}\n ' \
+        #           f'published: {self.published}\n ' \
+        #           f'>'
+        # return _return
 
 
 port = Port()
@@ -54,8 +62,18 @@ port.id = 1
 port.created_at = dt.utcnow()
 port.updated_at = dt.utcnow()
 port.published = True
-port.title = "New Title with a lot of content and fun."
-port.content = "A new content with a lot of content and fun."
+port.title = "New Title 1"
+port.content = "A new content 1"
+
+port_2 = Port()
+port_2.id = 2
+port_2.created_at = dt.utcnow()
+port_2.updated_at = dt.utcnow()
+port_2.published = True
+port_2.title = "A New Title 2"
+port_2.content = "A new content 2"
+
 print(port)
+print(port_2)
 
 
