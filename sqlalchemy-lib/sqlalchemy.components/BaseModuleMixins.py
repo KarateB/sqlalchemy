@@ -33,15 +33,23 @@ class Port(BaseMixin, UserModule):
     content = Column(String, nullable=False)
     published = Column(Boolean,  server_default="TRUE", nullable=False)
 
+    @property
+    def port_title(self):
+        return self.title
+
+    @property
+    def port_content(self):
+        return self.content
+
     def __repr__(self):
         _dict = dict()
         _dict_names = [a for a, b in Port.__dict__.items() if '_' not in str(a[::2])]
-        _dict_values = [b for a, b in Port.__dict__.items() if '_' not in str(a[::2])]
 
-        for i in range(len(_dict_values)):
+        for i in range(len(_dict_names)):
             _dict[str(_dict_names[i])] = str(getattr(self, _dict_names[i]))
 
         return str(_dict)
+
 
 
 port = Port()
