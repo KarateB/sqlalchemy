@@ -16,10 +16,6 @@ Base = declarative_base()
 
 class UserModule(UserMixin):
     ...
-
-
-
-
     # todo class BaseMixin will appear in all parent classes
     """ id_ = Column(Integer, primary_key=True, nullable=False)
     created_at = Column(DateTime, server_default=dt.utcnow(), nullable=False)
