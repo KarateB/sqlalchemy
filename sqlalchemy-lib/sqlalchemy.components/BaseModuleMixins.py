@@ -1,8 +1,6 @@
-import datetime
-
 from infos import url
 
-from sqlalchemy import Column, String, Integer, ForeignKey, Boolean, Table, create_engine, DateTime
+from sqlalchemy import Column, String, Boolean, create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy_mixins import UserMixin, BaseMixin
@@ -51,7 +49,6 @@ class Port(BaseMixin, UserModule):
         return str(_dict)
 
 
-
 port = Port()
 port.id = 1
 port.created_at = dt.utcnow()
@@ -68,7 +65,6 @@ port_2.published = True
 port_2.title = "A New Title 2"
 port_2.content = "A new content 2"
 
-print(port)
-print(port_2)
+list(print(_) for _ in [port, port_2])
 
 
