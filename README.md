@@ -14,8 +14,8 @@ change in class Objects.
 * [Pycharm](https://www.jetbrains.com/pycharm)
 * [sqlalchemy](https://pypi.org/project/SQLAlchemy)
 
-## Example Header
-* Clone project from git-hub with:
+## Clone project @GitHub
+* Clone project @git-hub:
 
 ```bash
 git clone git@github.com:KarateB/sqlalchemy.git
