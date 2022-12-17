@@ -1,4 +1,4 @@
-## ----------------------------------------------------------------------------------------
+## --------------------------------------------------------------------------------------
 # sqlalchemy-lib* 
 Some SQLAlchemy component, objects, table and schemas exampled
 in this library. Get copies to change with ready to use 
