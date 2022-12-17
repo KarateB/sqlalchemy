@@ -1,6 +1,5 @@
-# SQLAlchemy
-## ==> sqlalchemy-lib
-#
+## ----------------------------------------------------------------------------------------
+# sqlalchemy-lib* 
 Some SQLAlchemy component, objects, table and schemas exampled
 in this library. Get copies to change with ready to use 
 components in sqlalchemy library. Get Components and change
@@ -26,20 +25,20 @@ If git is not installed at your computer please install git first.
 * Open the project at pycharm.
 * Then follow steps.
 
-## Example Header
+## Install Requirements
 
-* Create Virtual Environment:
+* Create environment:
 
 ```bash
 python3 -m venv venv
 ```
 
-* Activate your environment with:
+* Activate environment:
 
 ```bash
 source venv/bin/activate 
 ```
-* Upgrade your pip before install requirements (Recommended):
+* Upgrade your pip (Recommended):
 
 ```bash
 pip install --upgrade pip 
