@@ -1,11 +1,10 @@
 from infos import url
 
-from sqlalchemy import create_engine, DateTime
+from sqlalchemy import Column, Integer, update,  create_engine, DateTime
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
-import sqlalchemy.sql.functions as func
-from sqlalchemy import Column, Integer, update
 from sqlalchemy_mixins import CrudMixin as CRUDMixin
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.sql.functions import func
 
 engine = create_engine(url=url, echo=False)
 session = sessionmaker(bind=engine)()
